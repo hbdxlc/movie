@@ -1,0 +1,21 @@
+{
+  "name": "movie_cms",
+  "version": "1.0.0",
+  "description": "Lead the film website backstage management system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "LC",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookies": "^0.7.2",
+    "crypto": "^1.0.1",
+    "express": "^4.16.3",
+    "less": "^3.8.1",
+    "markdown": "^0.5.0",
+    "mongoose": "^5.2.17",
+    "swig": "^1.4.2"
+  }
+}

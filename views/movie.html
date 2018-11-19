@@ -1,0 +1,92 @@
+<!--layout.html是公用的模板，可以使用继承-->
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container-fluid movie">
+    <ol class="breadcrumb">
+        <li><a href="/">首页</a></li>
+        <li class="active">{{title}}</li>
+    </ol>
+    <div role="tabpanel" class="user">
+        <ul class="nav nav-tabs" role="tablist" style="height: 44px;">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                      data-toggle="tab">电影列表</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">电影添加</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>电影名称</th>
+                        <th>电影图片</th>
+                        <th>电影地址</th>
+                        <th>下载地址</th>
+                        <th>上传时间</th>
+                        <th>点赞数量</th>
+                        <th>下载次数</th>
+                        <th>是否推荐到主页</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for list in movie%}
+                          <tr>
+                              <td>{{loop.index}}</td>
+                              <td>{{list.movieName}}</td>
+                              <td>{{list.movieType}}</td>
+                              <td><img src="{{list.movieImg}}"></td>
+                              <td>{{list.movieVideo}}</td>
+                              <td>{{list.movieDownload}}</td>
+                              <td>{{list.movieNumSuppose}}</td>
+                              <td>{{list.movieNumDownload}}</td>
+                              <td>{{list.movieTime}}</td>
+                              <td>{{list.movieMainPage}}</td>
+                          </tr>
+                    {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile">
+                <form name="myForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="movieName">电影名称:</label>
+                        <input type="text" class="form-control" id="movieName" name="movieName">
+                    </div>
+                    <div class="form-group">
+                        <label for="movieType">电影分类:</label>
+                        <select id="movieType" class="form-control" name="movieType">
+                            <option value="悬疑">悬疑</option>
+                            <option value="爱情">爱情</option>
+                            <option value="动作">动作</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="movieImg">展示图片:</label>
+                        <input type="file" class="form-control" id="movieImg" accept="image/*" name="movieImg">
+                    </div>
+                    <div class="form-group">
+                        <label for="movieVideo">电影文件:</label>
+                        <input type="file" class="form-control" id="movieVideo" accept="video/*" name="movieVideo">
+                    </div>
+                    <div class="form-group">
+                        <label for="movieDownload">下载路径:</label>
+                        <input type="text" class="form-control" id="movieDownload" value="/public/movie" name="movieDownload">
+                    </div>
+                    <div class="form-group">
+                        <label for="movieMainPage">是否推荐到主页:</label>
+                        <select id="movieMainPage" class="form-control" name="movieMainPage">
+                            <option value="true">是</option>
+                            <option value="false">否</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary submit">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="span100"></div>
+
+{% endblock%}

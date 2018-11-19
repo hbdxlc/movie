@@ -1,0 +1,110 @@
+<!--layout.html是公用的模板，可以使用继承-->
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container-fluid user">
+    <ol class="breadcrumb">
+        <li><a href="/">首页</a></li>
+        <li class="active">{{title}}</li>
+    </ol>
+    <div role="tabpanel" class="user">
+        <ul class="nav nav-tabs" role="tablist" style="height: 44px;">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                      data-toggle="tab">用户列表</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">用户添加</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>用户名</th>
+                        <th>邮箱</th>
+                        <th>电话</th>
+                        <th>类型</th>
+                        <th>权限</th>
+                        <th>封停</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for list in users%}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{list.username}}</td>
+                        <td>{{list.userMail}}</td>
+                        <td>{{list.userPhone}}</td>
+                        {% if list.userAdmin %}
+                        <td>管理员</td>
+                        {% else %}
+                        <td>普通用户</td>
+                        {% endif %}
+                        <td>{{list.userPower}}</td>
+                        {% if list.userStop %}
+                        <td>是</td>
+                        {% else %}
+                        <td>否</td>
+                        {% endif %}
+                        <td>
+                            <span class="btn btn-danger btn-xs del">删除</span>
+                            <span class="btn btn-primary btn-xs amend">修改</span>
+                        </td>
+                    </tr>
+                    {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile">
+                <form>
+                    <div class="form-group">
+                        <label for="username">用户名:</label>
+                        <input type="text" class="form-control" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码:</label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword">确认密码:</label>
+                        <input type="password" class="form-control" id="repassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="userMail">邮箱:</label>
+                        <input type="email" class="form-control" id="userMail">
+                    </div>
+                    <div class="form-group">
+                        <label for="userPhone">手机号:</label>
+                        <input type="text" class="form-control" id="userPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="userAdmin">类型:</label>
+                        <select id="userAdmin" class="form-control">
+                            <option value="true">管理员</option>
+                            <option value="false">普通用户</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPower">权限:</label>
+                        <select id="userPower" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="userStop">封停:</label>
+                       <select id="userStop" class="form-control">
+                           <option value="0">否</option>
+                           <option value="1">是</option>
+                       </select>
+                    </div>
+                    <button type="button" class="btn btn-primary register">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="span100"></div>
+
+{% endblock%}
